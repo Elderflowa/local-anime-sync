@@ -1,0 +1,17 @@
+# Use the official Go image based on Alpine Linux
+FROM golang:1.20-alpine
+
+# Install git to be able to clone the repository
+RUN apk update && apk add --no-cache git
+
+# Set the working directory
+WORKDIR /app
+
+# Clone the anilist-mal-sync repository into the container
+RUN git clone https://github.com/bigspawn/anilist-mal-sync.git .
+
+# Download dependencies and build the binary
+RUN go mod tidy && go build -o anilist-mal-sync .
+
+# Set the container's entrypoint to the compiled binary
+ENTRYPOINT ["/app/anilist-mal-sync"]

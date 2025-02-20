@@ -1,0 +1,5 @@
+services:
+  anilist-mal-sync:
+    build: .
+    container_name: anilist-mal-sync
+    restart: "no"
